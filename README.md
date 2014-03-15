@@ -14,4 +14,4 @@ See the [documentation](http://isabelcastillo.com/docs/category/woocommerce-vari
 
 **Credits**
 
-This is a modified version of a [gist by kloon](https://gist.github.com/kloon/4228021), which i joined with the plugin [WooCommerce Radio Buttons](http://wordpress.org/plugins/woocommerce-radio-buttons/) by DesignLoud.
+This is a modified version of a [gist by kloon](https://gist.github.com/kloon/4228021), which i joined with the plugin [WooCommerce Radio Buttons](http://wordpress.org/plugins/woocommerce-radio-buttons/) by [DesignLoud](http://designloud.com/).
