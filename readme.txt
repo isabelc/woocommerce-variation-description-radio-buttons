@@ -24,7 +24,7 @@ See the [documentation](http://isabelcastillo.com/docs/category/woocommerce-vari
 
 **Credits**
 
-This is a modified version of a [gist by kloon](https://gist.github.com/kloon/4228021), which i joined with the plugin [WooCommerce Radio Buttons](http://wordpress.org/plugins/woocommerce-radio-buttons/) by [DesignLoud](http://designloud.com/).
+This is a modified version of a [gist by kloon](https://gist.github.com/kloon/4228021), which i joined with the plugin [WooCommerce Radio Buttons](http://wordpress.org/plugins/woocommerce-radio-buttons/) by DesignLoud.
 
 == Installation ==
 
@@ -43,6 +43,9 @@ Open your WP Dashboard and click on products, then click on one of your variatio
 This is typically caused by a theme or plugin conflicting.  Try activating the default Twenty Fourteen WordPress theme.  If that doesnt work then go through and deactivate your plugins and then reactivate one at a time to find the conflict.
 
 == Changelog ==
+= 0.5.4 = 
+* Tweak: do singleton class.
+* Maintenance: inline small CSS to increase page load speed.
 
 = 0.5.3 =
 * Initial release.

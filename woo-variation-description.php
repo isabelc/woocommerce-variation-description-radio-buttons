@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Variation Description Radio Buttons
 Plugin URI: http://isabelcastillo.com/docs/category/woocommerce-variation-description-radio-buttons
 Description: Change WooCommerce variations into radio buttons and adds descriptions to variations.
-Version: 0.5.3
+Version: 0.5.4
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
@@ -25,11 +25,16 @@ You should have received a copy of the GNU General Public License
 along with WooCommerce Variation Description Radio Buttons; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 */
-
-if(!class_exists('Woo_Variation_Description_Radio_Buttons')) {
 class Woo_Variation_Description_Radio_Buttons{
 
-	public function __construct() {
+	private static $instance = null;
+	public static function get_instance() {
+		if ( null == self::$instance ) {
+			self::$instance = new self;
+		}
+		return self::$instance;
+	}
+	private function __construct() {
 		add_filter( 'woocommerce_locate_template', array( $this, 'wooradio_woocommerce_locate_template' ), 10, 3 ); 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_woo_radio_button_scripts' ) );
 		// @test removeadd_action( 'wp_footer', array( $this, 'register_woo_radio_button_scripts' )); 
@@ -142,8 +147,7 @@ class Woo_Variation_Description_Radio_Buttons{
 		endif;
 	}
 } // end class
-}
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	$Woo_Variation_Description_Radio_Buttons = new Woo_Variation_Description_Radio_Buttons();
+	$woo_variation_description_radio_buttons = Woo_Variation_Description_Radio_Buttons::get_instance();
 }
 ?>
