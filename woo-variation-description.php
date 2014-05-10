@@ -37,15 +37,12 @@ class Woo_Variation_Description_Radio_Buttons{
 	private function __construct() {
 		add_filter( 'woocommerce_locate_template', array( $this, 'wooradio_woocommerce_locate_template' ), 10, 3 ); 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_woo_radio_button_scripts' ) );
-		// @test removeadd_action( 'wp_footer', array( $this, 'register_woo_radio_button_scripts' )); 
+		add_action( 'wp_head', array( $this, 'inline_css' )); 
 		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variable_fields' ), 10, 2 );
 		add_action( 'woocommerce_product_after_variable_attributes_js', array( $this, 'variable_fields_js' ) );
 		add_action( 'woocommerce_process_product_meta_variable', array( $this, 'variable_fields_process' ), 10, 1 );
 	}
 
-	/**
-	* @since 0.3
-	*/
 	public function woovdrb_plugin_path() { 
 		// gets the absolute path to this plugin directory 
 		return untrailingslashit( plugin_dir_path( __FILE__ ) ); 
@@ -53,7 +50,6 @@ class Woo_Variation_Description_Radio_Buttons{
 
 	/**
 	* Use our template.
-	* @since 0.3
 	*/
 
 	public function wooradio_woocommerce_locate_template( $template, $template_name, $template_path ) { 
@@ -80,7 +76,6 @@ class Woo_Variation_Description_Radio_Buttons{
 	
 	/**
 	* Use our cart variation script.
-	* @since 0.3
 	*/
 
 	public function register_woo_radio_button_scripts () {
@@ -88,15 +83,21 @@ class Woo_Variation_Description_Radio_Buttons{
 		wp_dequeue_script('wc-add-to-cart-variation'); 
 		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce\assets\js\frontend\add-to-cart-variation.min.js', __FILE__ ), array( 'jquery'), false, true ); 
 		wp_enqueue_script('wc-add-to-cart-variation'); 
-		wp_enqueue_style('woo-variation-description', plugins_url('/style.css', __FILE__) );
+		// @test load inline wp_enqueue_style('woo-variation-description', plugins_url('/style.css', __FILE__) );
 
 	} 
-
+	/**
+	* Inline small CSS to increase page load speed
+	* @since 0.5.4
+	*/
+	public function inline_css() { ?>
+		<style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style>
+		<?php
+	}
+	
 	/**
 	* Add varation description field to backend.
-	* @since 0.3
 	*/
-
 	public function variable_fields( $loop, $variation_data ) {
 	?>	
 		<tr>
@@ -112,7 +113,6 @@ class Woo_Variation_Description_Radio_Buttons{
 	
 	/**
 	* JS for variation description field.
-	* @since 0.3
 	*/
 
 	public function variable_fields_js() {
