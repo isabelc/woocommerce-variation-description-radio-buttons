@@ -82,9 +82,9 @@ class Woo_Variation_Description_Radio_Buttons{
 		wp_deregister_script('wc-add-to-cart-variation'); 
 		wp_dequeue_script('wc-add-to-cart-variation'); 
 		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce\assets\js\frontend\add-to-cart-variation.min.js', __FILE__ ), array( 'jquery'), false, true ); 
-		wp_enqueue_script('wc-add-to-cart-variation'); 
-		// @test load inline wp_enqueue_style('woo-variation-description', plugins_url('/style.css', __FILE__) );
-
+		if (is_product()) {
+			wp_enqueue_script('wc-add-to-cart-variation'); 
+		}
 	} 
 	/**
 	* Inline small CSS to increase page load speed
