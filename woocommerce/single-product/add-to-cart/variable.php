@@ -26,7 +26,7 @@ global $woocommerce, $product, $post;
 					<tr>
 						<td class="label"><label for="<?php echo sanitize_title($name); ?>"><?php echo wc_attribute_label( $name ); ?></label></td>
 						<td class="value"><fieldset>
-                        <strong>Choose An Option...</strong><br />
+                        <strong><?php echo wc_attribute_label( $name ); ?></strong><br />
                         <?php
 					if ( is_array( $options ) ) {
  
