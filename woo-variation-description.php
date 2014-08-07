@@ -91,7 +91,7 @@ class Woo_Variation_Description_Radio_Buttons{
 	* @since 0.5.4
 	*/
 	public function inline_css() { ?>
-		<style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style>
+		<style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%;clear:left;}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em}.variations td.label{display:none}fieldset{border:0}.single_variation .amount{font-weight:700}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style>
 		<?php
 	}
 	
