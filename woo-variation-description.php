@@ -1,7 +1,7 @@
 <?php 
 /*
 Plugin Name: WooCommerce Variation Description Radio Buttons
-Plugin URI: http://isabelcastillo.com/docs/category/woocommerce-variation-description-radio-buttons
+Plugin URI: http://isabelcastillo.com/free-plugins/woocommerce-variation-description-radio-buttons
 Description: Change WooCommerce variations into radio buttons and adds descriptions to variations.
 Version: 0.6
 Author: Isabel Castillo
