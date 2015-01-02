@@ -1,10 +1,10 @@
 === WooCommerce Variation Description Radio Buttons ===
-Contributors: isabel104,DesignLoud
+Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: variations, woocommerce, variable products, variation descriptions, radio, radio buttons
 Requires at least: 3.7
-Tested up to: 3.9.2
-Stable Tag: 0.6
+Tested up to: 4.1
+Stable Tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,10 @@ Open your WP Dashboard and click on products, then click on one of your variatio
 This is typically caused by a theme or plugin conflicting.  Try activating the default Twenty Fourteen WordPress theme.  If that doesnt work then go through and deactivate your plugins and then reactivate one at a time to find the conflict.
 
 == Changelog ==
+
+= 0.7 = 
+* Tweak - Add formatted, unminified js.
+* Tweak - Remove unused single-product.js file.
 
 = 0.6 =
 * Fix - Align radio buttons better with CSS .
