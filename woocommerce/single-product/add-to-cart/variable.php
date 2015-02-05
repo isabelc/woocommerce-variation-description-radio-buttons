@@ -38,7 +38,7 @@ global $woocommerce, $product, $post;
 						foreach ( $options as $key => $option ) {
 
 							// use attribute $key to get the variation id from the $available_variations array
-							$var_id = $available_variations[$key][variation_id];
+							$var_id = $available_variations[$key]['variation_id'];
 							
 							// We then use the variation_id to get the value from _isa_woo_variation_desc
 							$var_description = get_post_meta( $var_id, '_isa_woo_variation_desc', true);

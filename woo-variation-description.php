@@ -99,12 +99,13 @@ class Woo_Variation_Description_Radio_Buttons{
 	* Add varation description field to backend.
 	*/
 	public function variable_fields( $loop, $variation_data ) {
+		$value = empty ( $variation_data['_isa_woo_variation_desc'][0] ) ? '' : $variation_data['_isa_woo_variation_desc'][0];
 	?>	
 		<tr>
 			<td>
 				<div>
 					<label><?php _e( 'Variation Description', 'woo-vdrb' ); ?></label>
-					<input type="text" size="5" name="isa_woo_variation_desc[<?php echo $loop; ?>]" value="<?php echo $variation_data['_isa_woo_variation_desc'][0]; ?>"/>
+					<input type="text" size="5" name="isa_woo_variation_desc[<?php echo $loop; ?>]" value="<?php echo $value; ?>"/>
 				</div>
 			</td>
 		</tr>
