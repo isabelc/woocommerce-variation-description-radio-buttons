@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40
 Tags: variations, woocommerce, variable products, variation descriptions, radio, radio buttons
 Requires at least: 3.7
 Tested up to: 4.1
-Stable Tag: 0.7
+Stable Tag: 0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,15 +34,11 @@ This is a modified version of a [gist by kloon](https://gist.github.com/kloon/42
 
 3. Also set a default variation to be selected in your edit product page.
 
-== Frequently Asked Questions ==
-
-= How to display 'add to cart' and selected variation automatically =
-Open your WP Dashboard and click on products, then click on one of your variation products and scroll down to product data.  Under the tab 'variations' select a default variation (towards the bottom) and click update.
-
-= I have downloaded your plugin and activated but I still do not get any radio buttons =
-This is typically caused by a theme or plugin conflicting.  Try activating the default Twenty Fourteen WordPress theme.  If that doesnt work then go through and deactivate your plugins and then reactivate one at a time to find the conflict.
 
 == Changelog ==
+
+= 0.8 =
+* Tweak - Removed 2 PHP notices for undefined variables.
 
 = 0.7 = 
 * Tweak - Add formatted, unminified js.

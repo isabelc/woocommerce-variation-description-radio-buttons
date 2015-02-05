@@ -7,7 +7,7 @@ This is a simple and light-weight plugin that once installed and activated will 
 
 It also adds a "Variation Description" field. You fill the field in the backend, and it will show on the frontend on the product page.
 
-It stops the forced display of "SKU". The SKU for variable products will only be displayed if you enter a SKU.
+It stops the forced display of "SKU: N/A". The SKU for the variable products will only be displayed if you enter a SKU. (WooCommerce default behavior is to show "SKU: N/A" if you don't enter a SKU for variable products.)
 
 See the [documentation](http://isabelcastillo.com/docs/category/woocommerce-variation-description-radio-buttons)
 
