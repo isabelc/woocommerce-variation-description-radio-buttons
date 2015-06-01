@@ -37,7 +37,8 @@ This is a modified version of a [gist by kloon](https://gist.github.com/kloon/42
 
 == Changelog ==
 = 0.9 =
-* Fix - Load unminified .js if SCRIPT_DEBUG is true.
+* Fix - Variation description field values were blank in the admin. So, if you update a product, the blank values were being saved, and in effect erasing the variation descriptions. Thanks to circularone for the report.
+* Tweak - Load unminified .js if SCRIPT_DEBUG is true.
 
 = 0.8 =
 * Tweak - Removed 2 PHP notices for undefined variables.
