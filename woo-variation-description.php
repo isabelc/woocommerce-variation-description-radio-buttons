@@ -3,14 +3,14 @@
 Plugin Name: WooCommerce Variation Description Radio Buttons
 Plugin URI: http://isabelcastillo.com/free-plugins/woocommerce-variation-description-radio-buttons
 Description: Change WooCommerce variations into radio buttons and adds descriptions to variations.
-Version: 0.8
+Version: 0.9
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
 Text Domain: woo-vdrb
 Domain Path: lang
 
-Copyright 2014 Isabel Castillo
+Copyright 2014 - 2015 Isabel Castillo
 
 WooCommerce Variation Description Radio Buttons is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as
@@ -38,9 +38,10 @@ class Woo_Variation_Description_Radio_Buttons{
 		add_filter( 'woocommerce_locate_template', array( $this, 'wooradio_woocommerce_locate_template' ), 10, 3 ); 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_woo_radio_button_scripts' ) );
 		add_action( 'wp_head', array( $this, 'inline_css' )); 
-		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variable_fields' ), 10, 2 );
+		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variable_fields' ), 10, 3 );
 		add_action( 'woocommerce_product_after_variable_attributes_js', array( $this, 'variable_fields_js' ) );
 		add_action( 'woocommerce_process_product_meta_variable', array( $this, 'variable_fields_process' ), 10, 1 );
+
 	}
 
 	public function woovdrb_plugin_path() { 
@@ -51,7 +52,6 @@ class Woo_Variation_Description_Radio_Buttons{
 	/**
 	* Use our template.
 	*/
-
 	public function wooradio_woocommerce_locate_template( $template, $template_name, $template_path ) { 
 		global $woocommerce; 
 		$_template = $template; 
@@ -79,10 +79,15 @@ class Woo_Variation_Description_Radio_Buttons{
 	*/
 
 	public function register_woo_radio_button_scripts () {
-		wp_deregister_script('wc-add-to-cart-variation'); 
-		wp_dequeue_script('wc-add-to-cart-variation'); 
-		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce\assets\js\frontend\add-to-cart-variation.min.js', __FILE__ ), array( 'jquery'), false, true ); 
-		if (is_product()) {
+		wp_deregister_script( 'wc-add-to-cart-variation' ); 
+		wp_dequeue_script( 'wc-add-to-cart-variation' ); 
+		$suffix = '.min.js';
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			$suffix = '.js';
+		}
+
+		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce\assets\js\frontend\add-to-cart-variation' . $suffix, __FILE__ ), array( 'jquery'), false, true ); 
+		if ( is_product() ) {
 			wp_enqueue_script('wc-add-to-cart-variation'); 
 		}
 	} 
@@ -98,15 +103,20 @@ class Woo_Variation_Description_Radio_Buttons{
 	/**
 	* Add varation description field to backend.
 	*/
-	public function variable_fields( $loop, $variation_data ) {
-		$value = empty ( $variation_data['_isa_woo_variation_desc'][0] ) ? '' : $variation_data['_isa_woo_variation_desc'][0];
+	public function variable_fields( $loop, $variation_data, $variation ) {
 	?>	
 		<tr>
 			<td>
-				<div>
-					<label><?php _e( 'Variation Description', 'woo-vdrb' ); ?></label>
-					<input type="text" size="5" name="isa_woo_variation_desc[<?php echo $loop; ?>]" value="<?php echo $value; ?>"/>
-				</div>
+			<?php
+			woocommerce_wp_text_input( 
+				array( 
+					'id'          => '_isa_woo_variation_desc['.$loop.']', 
+					'label'       => __( 'Variation Description', 'woo-vdrb' ), 
+					'desc_tip'    => 'true',
+					'description' => __( 'Enter a description for this variation.', 'woo-vdrb' ),
+					'value'       => get_post_meta( $variation->ID, '_isa_woo_variation_desc', true )
+			) );
+			?>
 			</td>
 		</tr>
 	<?php
@@ -120,10 +130,17 @@ class Woo_Variation_Description_Radio_Buttons{
 	?>
 		<tr>
 			<td>
-				<div>
-					<label><?php _e( 'Variation Description', 'woo-vdrb' ); ?></label>\
-					<input type="text" size="5" name="isa_woo_variation_desc[' + loop + ']" />\
-				</div>
+			<?php 
+			woocommerce_wp_text_input( 
+				array( 
+					'id'          => '_isa_woo_variation_desc[ + loop + ]', 
+					'label'       => __( 'Variation Description', 'woo-vdrb' ), 
+					'desc_tip'    => 'true',
+					'description' => __( 'Enter a description for this variation.', 'woo-vdrb' ),
+					'value'       => ''
+				)
+			);
+			?>
 			</td>
 		</tr>
 	<?php
@@ -138,11 +155,11 @@ class Woo_Variation_Description_Radio_Buttons{
 		if (isset( $_POST['variable_sku'] ) ) :
 			$variable_sku = $_POST['variable_sku'];
 			$variable_post_id = $_POST['variable_post_id'];
-			$variable_custom_field = $_POST['isa_woo_variation_desc'];
+			$variable_description_field = $_POST['_isa_woo_variation_desc'];
 			for ( $i = 0; $i < sizeof( $variable_sku ); $i++ ) :
 				$variation_id = (int) $variable_post_id[$i];
-				if ( isset( $variable_custom_field[$i] ) ) {
-					update_post_meta( $variation_id, '_isa_woo_variation_desc', stripslashes( $variable_custom_field[$i] ) );
+				if ( isset( $variable_description_field[$i] ) ) {
+					update_post_meta( $variation_id, '_isa_woo_variation_desc', stripslashes( $variable_description_field[$i] ) );
 				}
 			endfor;
 		endif;

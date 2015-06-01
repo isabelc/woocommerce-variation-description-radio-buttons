@@ -2,9 +2,9 @@
 Contributors: isabel104
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: variations, woocommerce, variable products, variation descriptions, radio, radio buttons
-Requires at least: 3.7
-Tested up to: 4.1
-Stable Tag: 0.8
+Requires at least: 4.2
+Tested up to: 4.2.2
+Stable Tag: 0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,8 @@ This is a modified version of a [gist by kloon](https://gist.github.com/kloon/42
 
 
 == Changelog ==
+= 0.9 =
+* Fix - Load unminified .js if SCRIPT_DEBUG is true.
 
 = 0.8 =
 * Tweak - Removed 2 PHP notices for undefined variables.
