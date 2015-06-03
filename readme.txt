@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40
 Tags: variations, woocommerce, variable products, variation descriptions, radio, radio buttons
 Requires at least: 4.2
 Tested up to: 4.2.2
-Stable Tag: 0.9
+Stable Tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,11 @@ This is a modified version of a [gist by kloon](https://gist.github.com/kloon/42
 
 
 == Changelog ==
+= 1.0 = 
+* Fix - Added compatibility with Global Attributes which are added in Products -> Attributes.
+* Tweak - Updated the .js. 
+* Tweak - Updated the variable.php template.
+
 = 0.9 =
 * Fix - Variation description field values were blank in the admin. So, if you update a product, the blank values were being saved, and in effect erasing the variation descriptions. Thanks to circularone for the report.
 * Tweak - Load unminified .js if SCRIPT_DEBUG is true.
