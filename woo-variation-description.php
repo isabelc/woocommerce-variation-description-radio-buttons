@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Variation Description Radio Buttons
 Plugin URI: http://isabelcastillo.com/free-plugins/woocommerce-variation-description-radio-buttons
 Description: Change WooCommerce variations into radio buttons and adds descriptions to variations.
-Version: 1.0
+Version: 1.1-beta3
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
@@ -79,12 +79,15 @@ class Woo_Variation_Description_Radio_Buttons{
 	public function register_woo_radio_button_scripts () {
 		wp_deregister_script( 'wc-add-to-cart-variation' ); 
 		wp_dequeue_script( 'wc-add-to-cart-variation' ); 
+
 		$suffix = '.min.js';
 		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 			$suffix = '.js';
 		}
 
-		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce\assets\js\frontend\add-to-cart-variation' . $suffix, __FILE__ ), array( 'jquery'), false, true ); 
+		wp_register_script( 'wc-add-to-cart-variation', plugins_url( 'woocommerce/assets/js/frontend/add-to-cart-variation' . $suffix, __FILE__ ), array( 'jquery'), false, true ); 
+
+
 		if ( is_product() ) {
 			wp_enqueue_script('wc-add-to-cart-variation'); 
 		}
@@ -93,9 +96,8 @@ class Woo_Variation_Description_Radio_Buttons{
 	* Inline small CSS to increase page load speed
 	* @since 0.5.4
 	*/
-	public function inline_css() { ?>
-		<style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%;clear:left;}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em}.variations td.label{display:none}fieldset{border:0}.single_variation .amount{font-weight:700}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style>
-		<?php
+	public function inline_css() {
+		?><style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%;clear:left;}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em;border:0}.woocommerce div.product form.cart .variations {width:100%}.single_variation .amount{font-weight:700}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style><?php
 	}
 	
 	/**
