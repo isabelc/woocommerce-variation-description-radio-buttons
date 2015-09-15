@@ -28,7 +28,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 						<?php
 						$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) : $product->get_variation_default_attribute( $attribute_name );
 						?>
-						<strong><?php echo wc_attribute_label( $name ); ?></strong><br />
+						<strong><?php echo wc_attribute_label( $attribute_name ); ?></strong><br />
 						<?php
 
 						$attribute = $attribute_name;
