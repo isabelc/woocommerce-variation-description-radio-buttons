@@ -27,14 +27,13 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 						<td class="value"><fieldset>
 						<?php
 						$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) : $product->get_variation_default_attribute( $attribute_name );
-						?>
-						<strong><?php echo wc_attribute_label( $name ); ?></strong><br />
-						<?php
 
 						$attribute = $attribute_name;
 						$name      = 'attribute_' . sanitize_title( $attribute );
 						$id        = sanitize_title( $attribute );
-
+						?>
+						<strong><?php echo wc_attribute_label( $name ); ?></strong><br />
+						<?php
 						if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
 							$attributes = $product->get_variation_attributes();
 							$options    = $attributes[ $attribute ];
@@ -52,12 +51,14 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 							}
 						} else {
 							foreach ( $options as $key => $option ) {
+
+
 								// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
 								// Use attribute key to get the variation id from the $available_variations array
 								$var_id = $available_variations[$key]['variation_id'];
 											
-								// Then use the variation_id to get the value from _isa_woo_variation_desc
+								// Then use the variation_id to get the value from _isa_woo_variation_desc @todo get new description
 								$var_description = get_post_meta( $var_id, '_isa_woo_variation_desc', true);
 
 								$selected = sanitize_title( $selected ) === $selected ? checked( $selected, sanitize_title( $option ), false ) : checked( $selected, $option, false );

@@ -3,7 +3,7 @@
 Plugin Name: WooCommerce Variation Description Radio Buttons
 Plugin URI: http://isabelcastillo.com/free-plugins/woocommerce-variation-description-radio-buttons
 Description: Change WooCommerce variations into radio buttons and adds descriptions to variations.
-Version: 1.1
+Version: 1.2.alpha1
 Author: Isabel Castillo
 Author URI: http://isabelcastillo.com
 License: GPL2
@@ -38,8 +38,6 @@ class Woo_Variation_Description_Radio_Buttons{
 		add_filter( 'woocommerce_locate_template', array( $this, 'wooradio_woocommerce_locate_template' ), 10, 3 ); 
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_woo_radio_button_scripts' ) );
 		add_action( 'wp_head', array( $this, 'inline_css' )); 
-		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'variable_fields' ), 10, 3 );
-		add_action( 'woocommerce_process_product_meta_variable', array( $this, 'variable_fields_process' ), 10, 1 );
 
 	}
 
@@ -100,96 +98,7 @@ class Woo_Variation_Description_Radio_Buttons{
 		?><style>.wvdrb-one-third,.wvdrb-two-thirds{float:left;margin:20px 0 10px}.wvdrb-one-third{width:31%;clear:left;}.wvdrb-two-thirds{width:65%}.variations fieldset{padding:1em;border:0}.woocommerce div.product form.cart .variations {width:100%}.single_variation .amount{font-weight:700}@media (max-width:768px){.wvdrb-one-third,.wvdrb-two-thirds{float:none;margin:20px 0 10px;width:100%}}</style><?php
 	}
 	
-	/**
-	* Add varation description field to backend.
-	*/
-	public function variable_fields( $loop, $variation_data, $variation ) {
-
-		if ( empty( $variation ) ) {
-			return;
-		}
-
-		// check if this attribute is a taxonomy (Global attribute)
-		$prefix = 'attribute_';
-		$attribute = '';
-		foreach ( $variation_data as $key => $value ) {
-			if ( substr( $key, 0, 10 ) == $prefix ) {
-				// get the attribute 
-				$attribute = substr( $key, 10 );
-
-			}
-		}
-
-		// Do not show description field for Global Attributes
-		// since they have desc field in Products -> Attributes
-		if ( ! taxonomy_exists( $attribute ) ) {
-
-			add_action( 'woocommerce_product_after_variable_attributes_js', array( $this, 'variable_fields_js' ) );
-			?>	
-			<tr>
-				<td>
-				<?php
-				if ( isset( $variation->ID ) ) {
-					woocommerce_wp_text_input( 
-						array( 
-							'id'          => '_isa_woo_variation_desc['.$loop.']', 
-							'label'       => __( 'Variation Description', 'woo-vdrb' ), 
-							'desc_tip'    => 'true',
-							'description' => __( 'Enter a description for this variation.', 'woo-vdrb' ),
-							'value'       => get_post_meta( $variation->ID, '_isa_woo_variation_desc', true )
-					) );
-				}
-				?>
-				</td>
-			</tr>
-		<?php
-		}
-	}
-	
-	/**
-	* JS for variation description field.
-	*/
-
-	public function variable_fields_js() {
-	?>
-		<tr>
-			<td>
-			<?php 
-			woocommerce_wp_text_input( 
-				array( 
-					'id'          => '_isa_woo_variation_desc[ + loop + ]', 
-					'label'       => __( 'Variation Description', 'woo-vdrb' ), 
-					'desc_tip'    => 'true',
-					'description' => __( 'Enter a description for this variation.', 'woo-vdrb' ),
-					'value'       => ''
-				)
-			);
-			?>
-			</td>
-		</tr>
-	<?php
-	}
-
-	/**
-	* Save varation description values
-	* @since 0.3
-	*/
-	
-	public function variable_fields_process( $post_id ) {
-		if (isset( $_POST['variable_sku'] ) ) :
-			$variable_sku = $_POST['variable_sku'];
-			$variable_post_id = $_POST['variable_post_id'];
-			$variable_description_field = isset( $_POST['_isa_woo_variation_desc'] ) ? $_POST['_isa_woo_variation_desc'] : '';
-			for ( $i = 0; $i < sizeof( $variable_sku ); $i++ ) :
-				$variation_id_pre = isset( $variable_post_id[$i] ) ? $variable_post_id[$i] : '';
-				$variation_id = (int) $variation_id_pre;
-				if ( isset( $variable_description_field[$i] ) ) {
-					update_post_meta( $variation_id, '_isa_woo_variation_desc', stripslashes( $variable_description_field[$i] ) );
-				}
-			endfor;
-		endif;
-	}
-} // end class
+}
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 	$woo_variation_description_radio_buttons = Woo_Variation_Description_Radio_Buttons::get_instance();
 }
