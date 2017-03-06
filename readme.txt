@@ -1,6 +1,5 @@
 === WooCommerce Variation Description Radio Buttons ===
 Contributors: isabel104
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=me%40isabelcastillo%2ecom
 Tags: variations, woocommerce, variable products, variation descriptions, radio, radio buttons
 Requires at least: 4.2
 Tested up to: 4.3
@@ -18,7 +17,7 @@ It also adds a "Variation Description" field. You fill the field in the backend,
 
 It stops the forced display of "SKU". The SKU for variable products will only be displayed if you enter a SKU.
 
-See the [documentation](http://isabelcastillo.com/docs/category/woocommerce-variation-description-radio-buttons)
+See the [documentation](https://isabelcastillo.com/docs/woocommerce-variation-description-radio-buttons-plugin)
 
 
 **Credits**
