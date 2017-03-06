@@ -9,7 +9,7 @@ It also adds a "Variation Description" field. You fill the field in the backend,
 
 It stops the forced display of "SKU: N/A". The SKU for the variable products will only be displayed if you enter a SKU. (WooCommerce default behavior is to show "SKU: N/A" if you don't enter a SKU for variable products.)
 
-See the [documentation](http://isabelcastillo.com/docs/category/woocommerce-variation-description-radio-buttons)
+See the [documentation](https://isabelcastillo.com/docs/woocommerce-variation-description-radio-buttons-plugin)
 
 
 **Credits**
